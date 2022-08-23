@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  stable_diffusion:
+    build: .
+    volumes:
+      - type: bind
+        source: "./"
+        target: "/workspace"
+    working_dir: /workspace
+    command: python main.py
+    shm_size: '32gb'
+    env_file:
+      - .env
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
